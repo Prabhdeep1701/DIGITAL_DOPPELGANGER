@@ -1,5 +1,9 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000';
+const WS_URL =
+  process.env.NEXT_PUBLIC_WS_URL ||
+  (API_URL.startsWith('https')
+    ? API_URL.replace('https', 'wss')
+    : API_URL.replace('http', 'ws'));
 
 export async function fetchApi<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, {
