@@ -46,4 +46,8 @@ app.include_router(ws_router, prefix="/ws", tags=["websocket"])
 
 @app.get("/api/health")
 async def health():
-    return {"status": "ok", "service": "digital-doppelganger"}
+    return {
+        "status": "ok",
+        "service": "digital-doppelganger",
+        "cors_origins": settings.cors_origins_list,
+    }
